@@ -1,0 +1,5 @@
+[prometheusClient]
+192.168.56.102
+
+[prometheusServer]
+192.168.56.105

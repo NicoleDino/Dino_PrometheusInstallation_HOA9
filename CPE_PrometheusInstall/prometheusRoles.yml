@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Update repository index for CentOS
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: Install updates for Ubuntu
+    tags: always
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: prometheusClient
+  become: true
+  roles:
+    - prometheusClient
+
+- hosts: prometheusServer
+  become: true
+  roles:
+    - prometheusServer
+
